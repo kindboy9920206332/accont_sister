@@ -1,0 +1,9 @@
+node_modules
+layout.js
+eslint.config.mjs
+jsconfig.json
+next.config.mjs
+package-lock.json
+package.json
+public
+.next
