@@ -7,7 +7,7 @@ export default function Accont_Pannel_meno() {
       porofile: "Jimmy smith",
       img: "/svgs/profile-circle.svg",
       class: "text-black  font-bold",
-      click_go_page: "#",
+      click_go_page: "/personal",
       contain: false,
     },
     {
@@ -104,8 +104,8 @@ export default function Accont_Pannel_meno() {
             key={index}
             className={
               item.contain === false
-                ? "flex justify-start items-center h-[40px] gap-3 pl-2 ml-3 "
-                : "flex justify-start items-center h-[40px] gap-3  pl-2 ml-3 border border-[0px] border-l-[3px] rounded-[5px]  border-l-blue-900"
+                ? "flex justify-start items-center h-[50px] gap-3 pl-2 ml-3 "
+                : "flex justify-start items-center h-[50px] gap-3  pl-2 ml-3 border border-[0px] border-l-[3px] rounded-[5px]  border-l-blue-900"
             }
           >
             <img src={item.img} />
