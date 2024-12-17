@@ -1,8 +1,8 @@
 "use client";
 import { createContext, useEffect, useState } from "react";
-import Accont_Pannel_meno from "./Accont_pannel/Accont_pannel";
-import Personal_Accont from "./Accont_personall/personall";
-import Payment_Instalments from "./Payment & Instalments/Payment";
+import Accont_Pannel_meno from "../Accont_pannel/Accont_pannel";
+import Personal_Accont from "../Accont_personall/personall";
+import Payment_Instalments from "../Payment & Instalments/Payment";
 export const PanelContext = createContext();
 export default function Accont_Home() {
   const [secen_pennel, set_secen_pannel] = useState();
@@ -33,12 +33,12 @@ export default function Accont_Home() {
           },
         }}
       >
-        <div className="w-[100%] h-[86%] absolute bottom-0 flex justify-center  ">
-          <div className="w-[88%] h-[100%] flex relative justify-between items-start bottom-0 ">
-            <div className=" inline-flex py-[20px] px-[2px] bg-gray-100 rounded-[7px] w-[250px] h-[550px]">
+        <div className="w-[100%] h-[80%] md:h-[86%] absolute bottom-0 flex justify-center  ">
+          <div className="  h-[100%] w-[100%] md:w-[88%] h-[100%] flex relative justify-between items-start bottom-0 ">
+            <div className="inline-flex md:bg-gray-100 rounded-[7px] w-[100%] h-[100%] md:py-[20px] md:px-[2px] md:w-[250px] md:h-[550px]">
               <Accont_Pannel_meno></Accont_Pannel_meno>
             </div>
-            <div className="w-[74%] h-[100%] relative">
+            {/* <div className="w-[74%] h-[100%] relative">
               {secen_pannels_name.map((item, index) => {
                 if (item.name_pannel === secen_pennel) {
                   return <div key={index}>{item.component}</div>;
@@ -46,7 +46,7 @@ export default function Accont_Home() {
                   return null;
                 }
               })}
-            </div>
+            </div> */}
           </div>
         </div>
       </PanelContext.Provider>

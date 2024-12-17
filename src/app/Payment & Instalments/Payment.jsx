@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function Payment_Instalments() {
   const inputs_pay = [
     {

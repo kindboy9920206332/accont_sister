@@ -1,14 +1,17 @@
 "use client";
-import { useContext, useState } from "react";
-import { PanelContext } from "../Accont_Home";
+import { useContext, useEffect, useState } from "react";
+import Link from "next/link";
+import { PanelContext } from "../Accont/Accont_Home";
 export default function Accont_Pannel_meno() {
   const { FU_set_pannel } = useContext(PanelContext);
+  const [width_window, set_width_window] = useState(window.innerWidth);
   const [item_meno, set_item_meno] = useState([
     {
       porofile: "Jimmy smith",
       img: "/svgs/profile-circle.svg",
-      class: "text-black  font-bold",
+      class: "text-black font-bold",
       contain: false,
+      Link: "/Accont_pannel",
     },
     {
       porofile: "Personal Data",
@@ -16,6 +19,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "personal",
       contain: false,
+      Link: "/Accont_personall",
       class2: "text-blue-500 ",
     },
     {
@@ -24,6 +28,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "Payment",
       contain: false,
+      Link: "/Payment & Instalments",
       class2: "text-blue-500 ",
     },
     {
@@ -32,14 +37,16 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "Orders",
       contain: false,
+      Link: "/Accont_pannel",
       class2: "text-blue-500 ",
     },
     {
       porofile: "Wish list",
       img: "/svgs/heart.svg",
-      class: "text-gray-700 hover:text-blue-500 cursor-pointer",
+      class: "text-gray-700 hover:text-blue-500 cursor-pointer ",
       click_go_page: "Wish list",
       contain: false,
+      Link: "/Accont_pannel",
       class2: "text-blue-500 ",
     },
     {
@@ -48,6 +55,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "Discounts",
       contain: false,
+      Link: "/Accont_pannel",
       class2: "text-blue-500 ",
     },
     {
@@ -56,6 +64,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "Security",
       contain: false,
+      Link: "/Accont_pannel",
       class2: "text-blue-500 ",
     },
     {
@@ -64,6 +73,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer ",
       click_go_page: "Notification",
       contain: false,
+      Link: "/Accont_pannel",
       class2: "text-blue-500 ",
     },
     {
@@ -72,6 +82,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "Contact",
       contain: false,
+      Link: "/Accont_pannel",
       class2: "text-blue-500 ",
     },
     {
@@ -80,12 +91,20 @@ export default function Accont_Pannel_meno() {
       class: "text-red-600",
       click_go_page: "Log_out",
       contain: false,
+      Link: "/Accont_pannel",
     },
   ]);
 
+  useEffect(() => {
+    function set_width() {
+      set_width_window(() => window.innerWidth);
+    }
+    window.addEventListener("resize", set_width);
+    return () => window.removeEventListener("resize", set_width);
+  });
   return (
     <>
-      <div>
+      <div className="w-[100%]">
         {item_meno.map((item, index) => (
           <div
             onClick={() => {
@@ -102,8 +121,10 @@ export default function Accont_Pannel_meno() {
             key={index}
             className={
               item.contain === false
-                ? "flex justify-start items-center h-[50px] gap-3 pl-2 ml-3 "
-                : "flex justify-start items-center h-[50px] gap-3  pl-2 ml-3 border border-[0px] border-l-[3px] rounded-[5px]  border-l-blue-900"
+                ? item.porofile === "Jimmy smith"
+                  ? "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-2  border border-b-[1px] border-b-gray-400  bg-gray-200 md:border-[0px] md:bg-inherit "
+                  : "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-2  border border-b-[1px] border-b-gray-400  md:border-[0px]"
+                : "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-1  border border-[0px] border-l-[3px] rounded-[5px]  md:border-l-blue-900"
             }
           >
             <img src={item.img} />
@@ -113,6 +134,16 @@ export default function Accont_Pannel_meno() {
             >
               {item.porofile}
             </span>
+            {width_window <= 600 && item.porofile != "Jimmy smith" ? (
+              <Link href={item.Link}>
+                <img
+                  src="./svgs/arrow-circle-right.svg"
+                  className="absolute right-2 "
+                />
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         ))}
       </div>
