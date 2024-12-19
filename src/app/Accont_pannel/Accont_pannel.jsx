@@ -2,9 +2,13 @@
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { PanelContext } from "../Accont/Accont_Home";
+import { useRouter } from "next/navigation";
 export default function Accont_Pannel_meno() {
+  const route = useRouter();
   const { FU_set_pannel } = useContext(PanelContext);
-  const [width_window, set_width_window] = useState(window.innerWidth);
+  const [width_window, set_width_window] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
   const [item_meno, set_item_meno] = useState([
     {
       porofile: "Jimmy smith",
@@ -28,7 +32,7 @@ export default function Accont_Pannel_meno() {
       class: "text-gray-700 hover:text-blue-500 cursor-pointer",
       click_go_page: "Payment",
       contain: false,
-      Link: "/Payment & Instalments",
+      Link: "/Payment_Instalments",
       class2: "text-blue-500 ",
     },
     {
@@ -94,14 +98,16 @@ export default function Accont_Pannel_meno() {
       Link: "/Accont_pannel",
     },
   ]);
-
   useEffect(() => {
-    function set_width() {
-      set_width_window(() => window.innerWidth);
-    }
-    window.addEventListener("resize", set_width);
-    return () => window.removeEventListener("resize", set_width);
-  });
+    const handleResize = () => {
+      set_width_window(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="w-[100%]">
@@ -122,25 +128,29 @@ export default function Accont_Pannel_meno() {
             className={
               item.contain === false
                 ? item.porofile === "Jimmy smith"
-                  ? "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-2  border border-b-[1px] border-b-gray-400  bg-gray-200 md:border-[0px] md:bg-inherit "
-                  : "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-2  border border-b-[1px] border-b-gray-400  md:border-[0px]"
-                : "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-1  border border-[0px] border-l-[3px] rounded-[5px]  md:border-l-blue-900"
+                  ? "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-2 relative  border border-b-[1px] border-b-gray-400  bg-gray-200 md:border-[0px] md:bg-inherit "
+                  : "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-2 relative  border border-b-[1px] border-b-gray-400  md:border-[0px]"
+                : "flex justify-start items-center h-[70px] md:h-[50px] gap-3 pl-4 md:pl-1   relative border-l-[3px] rounded-[5px]  md:border-l-blue-900"
             }
           >
             <img src={item.img} />
             <span
-              onClick={() => FU_set_pannel(item.porofile)}
+              onClick={() => {
+                if (width_window > 600) {
+                  FU_set_pannel(item.porofile);
+                } else {
+                  route.push(item.Link);
+                }
+              }}
               className={!item.contain ? item.class : item.class2}
             >
               {item.porofile}
             </span>
-            {width_window <= 600 && item.porofile != "Jimmy smith" ? (
-              <Link href={item.Link}>
-                <img
-                  src="./svgs/arrow-circle-right.svg"
-                  className="absolute right-2 "
-                />
-              </Link>
+            {width_window < 600 && item.porofile != "Jimmy smith" ? (
+              <img
+                src="./svgs/arrow-circle-right.svg"
+                className="absolute right-2 bottom-[20px]"
+              />
             ) : (
               ""
             )}
