@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -13,10 +12,15 @@
     --foreground: #ededed;
   }
 } */
+@font-face {
+  font-family: "Dana";
+  src: url("/fonts_dana/dana demibold.ttf") format(truetype);
+}
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  font-family: "Dana";
 }
 body {
   height: 100vh;

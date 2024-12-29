@@ -1,8 +1,8 @@
 "use client";
 import { createContext, useEffect, useState } from "react";
-import Accont_Pannel_meno from "../Accont_pannel/Accont_pannel";
-import Personal_Accont from "../Accont_personall/personall";
-import Payment_Instalments from "../Payment_Instalments/Payment";
+import Accont_Pannel_meno from "./Accont_pannel/Accont_pannel";
+import Personal_Accont from "./Accont_personall/personall";
+import Payment_Instalments from "./Payment_Instalments/Payment";
 export const PanelContext = createContext();
 export default function Accont_Home() {
   const [width_window, set_width_window] = useState(
